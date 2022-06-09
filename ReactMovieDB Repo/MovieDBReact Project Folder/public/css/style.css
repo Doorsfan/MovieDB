@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Open+Sans&display=swap');
+
+body {
+  margin: 0;
+  background-color: black;
+  font-family: 'Open Sans';
+}
+
+.loginText{
+  text-align: center;
+}
+
+.homeLogo {
+  width: 45px;
+  height: 45px;
+  border-radius: 30px;
+  position: relative;
+  top: -7px;
+}
+
+h3 {
+  font-family: 'Grape Nuts';
+  font-weight: normal;
+  font-size: 200%;
+  margin: 15px 0 0 0;
+}
+
+.topicTitle {
+  font-weight: normal;
+  font-size: 200%;
+  margin-top: 10px;
+}
+
+.submitButton {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  display: block;
+  margin-top: 10px;
+}
+
+.loginForm {
+  display: block;
+  background-color: red;
+  width: max-content;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 38vh;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+.registerForm {
+  display: block;
+  background-color: white;
+  width: max-content;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25vh;
+  border: solid 1px black;
+}
+
+.homeLink {
+  text-decoration: none;
+  color: black;
+}
+
+.loginText{
+  text-decoration: none;
+  font-size: 20px;
+  position: relative;
+  top: 36vh;
+  color: white;
+}
+
+.homeText {
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-size: 35px;
+  position: relative;
+  top: -5px;
+}
+
+.loginButton{
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.usernameText, .passwordText{
+  color: white;
+}
+
+.passwordText{
+  text-align: center;
+}
+.registerLink {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+.registerLinkDiv {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.registerDiv {
+  text-align: center;
+}
+
+main {
+  max-width: 650px;
+  margin: 40px auto;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
+.person {
+  cursor: pointer;
+  border-bottom: 1px solid #999;
+  padding-bottom: 5px;
+}
+
+.person:nth-child(odd) h3 {
+  color: rgb(52, 56, 191);
+}
+
+.createdDiv,
+.postedDiv {
+  width: max-content;
+}
+
+.header {
+  height: 50px;
+  background-color: #FF1C1C;
+  color: white;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 10px auto max-content auto max-content max-content 80px;
+}
+
+.createNewGroupLink {
+  color: black;
+  text-decoration: none;
+}
+
+.createNewThreadButton {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: max-content;
+}
+
+.createNewThreadButton {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.postResponseButton {
+  margin-top: 10px;
+}
+
+.mainPostInputDiv {
+  margin-bottom: 20px;
+  width: max-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.postResponseButton {
+  width: max-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.memberGrid {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: red;
+  width: 1000px;
+}
+
+.invitePersonForm {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  margin-top: 10px;
+}
+
+.invitePersonButton {
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.createNewPostButton {
+  margin-bottom: 20px;
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.promoteUserButton {
+  margin-left: 15px;
+}
+
+.titleItemsGrid {
+  display: grid;
+  grid-template-columns: 40% max-content 30px max-content 30px max-content auto;
+}
+
+.groupItemInProfile {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.blockUserButton {
+  width: 200px;
+}
+
+.blockedDiv {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.SpaceBlock {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.userGridInProfile {
+  display: grid;
+  grid-template-columns: auto max-content max-content max-content max-content max-content max-content max-content max-content max-content max-content max-content max-content auto;
+  background-color: white;
+  border: solid 1px black;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+}
+
+.post {
+  background-color: red;
+  width: 800px;
+  height: max-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.createThreadButton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
+
+.threadForm {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+}
+
+.createNewGroupDiv {
+  display: block;
+  text-decoration: none;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.GroupsTitle {
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.logOutText {
+  position: relative;
+  left: -30px;
+}
+.profileText {
+  width: max-content;
+  position: relative;
+  left: -20px;
+}
+.profileLink {
+  text-decoration: none;
+  color: black;
+  width: 80px;
+}
+.ForumText {
+  font-size: 40px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  position: relative;
+  top: -10px;
+}
+
+.thread {
+  display: grid;
+  grid-template-columns: max-content auto 200px 20px;
+  margin-top: -10px;
+}
+
+.roleText,
+.usernameText,
+.groupsText {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}

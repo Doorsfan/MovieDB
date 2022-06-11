@@ -6,7 +6,7 @@ body {
   font-family: 'Open Sans';
 }
 
-.loginText{
+.loginText {
   text-align: center;
 }
 
@@ -39,6 +39,22 @@ h3 {
   margin-top: 10px;
 }
 
+.registerButton {
+  background-color: #C4C4C4;
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  display: block;
+  margin-top: 10px;
+  color: white;
+  -webkit-text-stroke-width: 0.8px;
+  -webkit-text-stroke-color: black;
+  font-size: 25px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .loginForm {
   display: block;
   background-color: red;
@@ -53,6 +69,70 @@ h3 {
   border-radius: 10px;
 }
 
+.ratingDiv {
+  display: grid;
+  grid-template-columns: 15px max-content auto max-content 15px max-content 15px max-content 15px;
+}
+
+.firstTagDiv,
+.secondTagDiv,
+.thirdTagDiv {
+  color: white;
+  background-color: black;
+  width: max-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 30px;
+}
+
+.searchBarPart {
+  background-color: #ff1c1c;
+  padding-bottom: 20px;
+}
+.searchBar {
+  border-radius: 30px;
+  padding-left: 10px;
+}
+
+.movieImageLogoDiv {
+  display: grid;
+  grid-template-columns: 10px max-content 15px auto auto max-content 15px;
+}
+
+.movieTitleDiv,
+.createdDate {
+  position: relative;
+  top: 15px;
+}
+
+.movieImageLogo {
+  width: 75px;
+  height: 100px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.ratingText {
+  color: white;
+  display: inline-block;
+  margin-left: 5px;
+  position: relative;
+  top: 5px;
+}
+
+.ratingDiv {
+  margin-left: 15px;
+}
+
+.starImageLogo {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  position: relative;
+  right: 15px;
+}
 .registerForm {
   display: block;
   background-color: white;
@@ -71,7 +151,7 @@ h3 {
   color: black;
 }
 
-.loginText{
+.loginText {
   text-decoration: none;
   font-size: 20px;
   position: relative;
@@ -95,16 +175,28 @@ h3 {
   top: -5px;
 }
 
-.loginButton{
+.movieArticle {
+  background-color: #ff1c1c;
+  padding-bottom: 15px;
+  border-radius: 15px;
+}
+
+.startPageBody {
+  background-color: black;
+}
+
+.loginButton {
   margin-top: 6px;
   margin-bottom: 6px;
 }
 
-.usernameText, .passwordText{
+.usernameText,
+.passwordText {
   color: white;
+  margin: 5px;
 }
 
-.passwordText{
+.passwordText {
   text-align: center;
 }
 .registerLink {
@@ -147,7 +239,7 @@ main {
 
 .header {
   height: 50px;
-  background-color: #FF1C1C;
+  background-color: #ff1c1c;
   color: white;
   padding-top: 20px;
   display: grid;
@@ -195,7 +287,7 @@ main {
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
   margin-left: auto;
   margin-right: auto;
-  background-color: red;
+  background-color: #ff1c1c;
   width: 1000px;
 }
 
@@ -232,9 +324,25 @@ main {
   grid-template-columns: 40% max-content 30px max-content 30px max-content auto;
 }
 
+.passwordP,
+.usernameP,
+.profileP {
+  text-align: center;
+  font-size: 30px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
 .groupItemInProfile {
   margin-top: 6px;
   margin-bottom: 6px;
+}
+
+.searchBarPart {
+  display: grid;
+  grid-template-columns: auto max-content 15px max-content auto;
 }
 
 .blockUserButton {
@@ -266,8 +374,38 @@ main {
   padding-left: 20px;
 }
 
+.registerFormDiv{
+  position: relative;
+  top: -50px;
+}
+
+.inputGrid{
+  display: grid;
+  grid-template-columns: auto max-content auto;
+}
+
+.RegisterTitleText{
+  text-align: center;
+  color: white;
+  font-size: 35px;
+  position: relative;
+  top: 130px;
+}
+
+.registerForm {
+  background-color: #ff1c1c;
+  color: white;
+  border-radius: 15px;
+}
+
+.SearchIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+
 .post {
-  background-color: red;
+  background-color: #ff1c1c;
   width: 800px;
   height: max-content;
   display: block;

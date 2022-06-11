@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import placeholder from '/images/placeholder.png';
+import starLogo from '/images/star.png';
 
 // a subclass to FetchHelper
 import Thread from '../utilities/Thread';
@@ -24,6 +26,7 @@ export default function StartPage() {
   const [alreadyPartOfGroups, setAlreadyPartOfGroups] = useState([]);
   const [joinedNewGroup, setJoinedNewGroup] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
+  const [movieArticles, setMovieArticles] = useState([]);
 
   let navigate = useNavigate();
 
@@ -120,6 +123,18 @@ export default function StartPage() {
   // Run this when our component mounts (we can see it on screen)
   useEffect(() => {
     (async () => {
+      let myArticles = [];
+      let newArticle = {
+        title: 'bla',
+        rating: 4.3,
+        created: '2022-10-02',
+        firstTag: 'Action',
+        secondTag: 'Pirates',
+        thirdTag: 'Johny Depp',
+      };
+      myArticles.push(newArticle);
+      setMovieArticles(myArticles);
+
       fetch(`api/getAllGroups/`, {
         method: 'GET',
         headers: {
@@ -195,24 +210,48 @@ export default function StartPage() {
           </div>
         )}
       </div>
-      <main>
-        <div className='GroupsTitle'>Groups</div>
-        {userGroups.map(({ id, name, description }) => (
-          <div className='group' key={id}>
-            <h3
-              className='groupName'
-              onClick={() => {
-                if (loggedIn) {
-                  navigate('./Threads/' + name);
-                }
-              }}
-            >
-              {name}
-            </h3>
-            <div className='descriptionDiv'>{description}</div>
-            {renderJoinButton(name)}
-          </div>
-        ))}
+      <div className='searchBarPart'>
+        <div className='SpaceBlock' />
+        <input type='text' className='searchBar' placeholder='Search..' />
+        <div className='SpaceBlock' />
+        <img className='SearchIcon' src={placeholder} />
+        <div className='SpaceBlock' />
+      </div>
+      <main className='startPageBody'>
+        {movieArticles.length > 0 &&
+          movieArticles.map(
+            ({ id, title, rating, created, firstTag, secondTag, thirdTag }) => (
+              <div className='movieArticle' key={id}>
+                <div className='movieImageLogoDiv'>
+                  <div className='SpaceBlock' />
+                  <img
+                    className='movieImageLogo'
+                    src={placeholder}
+                    alt='Home'
+                  />
+                  <div className='SpaceBlock' />
+                  <div className='movieTitleDiv'>{title}</div>
+                  <div className='SpaceBlock' />
+                  <div className='createdDate'>{created}</div>
+                  <div className='SpaceBlock' />
+                </div>
+                <div className='ratingDiv'>
+                  <div className='SpaceBlock' />
+                  <div className='ratingDiv'>
+                    <img className='starImageLogo' src={starLogo} alt='Star' />
+                    <div className='ratingText'>{rating}/5</div>
+                  </div>
+                  <div className='SpaceBlock' />
+                  <div className='firstTagDiv'>{firstTag}</div>
+                  <div className='SpaceBlock' />
+                  <div className='secondTagDiv'>{secondTag}</div>
+                  <div className='SpaceBlock' />
+                  <div className='thirdTagDiv'>{thirdTag}</div>
+                  <div className='SpaceBlock' />
+                </div>
+              </div>
+            )
+          )}
       </main>
     </div>
   );

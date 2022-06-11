@@ -6,6 +6,7 @@ import {
   Link,
   useNavigate,
 } from 'react-router-dom';
+import homeLogo from '/images/home.png';
 
 export default function LoginPage() {
   const [username, setUserName] = useState();
@@ -71,44 +72,68 @@ export default function LoginPage() {
     <div>
       <div className='header'>
         <div className='SpaceBlock' />
-        <div className='homeText'></div>
+        <div className='homeText'>
+          <Link className='homeLink' to='/'>
+            <img className='homeLogo' src={homeLogo} alt='Home' />
+          </Link>
+        </div>
         <div className='SpaceBlock' />
         <div className='ForumText'>The Music Forum</div>
         <div className='SpaceBlock' />
-        <div className='homeText'>
-          <Link className='homeLink' to='/'>
-            Home
-          </Link>
-        </div>
+        <div className='homeText'></div>
       </div>
-      <div>
+      <div className='RegisterTitleText'>--=== Register ===--</div>
+      <div className='registerFormDiv'>
         <form onSubmit={handleSubmit} className='registerForm'>
           <label>
-            <p>Username</p>
-            <input type='text' onChange={(e) => setUserName(e.target.value)} />
+            <p className='usernameP'>-= Username =-</p>
+            <div className='inputGrid'>
+              <div className='SpaceBlock' />
+              <input
+                type='text'
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder='Username..'
+              />
+              <div className='SpaceBlock' />
+            </div>
           </label>
           <label>
-            <p>Password</p>
-            <input
-              type='password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <p className='passwordP'>-= Password =-</p>
+            <div className='inputGrid'>
+              <div className='SpaceBlock' />
+              <input
+                type='password'
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder='Password..'
+              />
+              <div className='SpaceBlock' />
+            </div>
           </label>
           <label>
-            <p>Repeat Password</p>
-            <input
-              type='password'
-              onChange={(e) => setRepeatPassword(e.target.value)}
-            />
+            <p className='passwordP'>-= Repeat Password =-</p>
+            <div className='inputGrid'>
+              <div className='SpaceBlock' />
+              <input
+                type='password'
+                onChange={(e) => setRepeatPassword(e.target.value)}
+                placeholder='Repeat Password..'
+              />
+              <div className='SpaceBlock' />
+            </div>
           </label>
           <label>
-            <p>Profile URL</p>
-            <input
-              type='text'
-              onChange={(e) => setProfileImage(e.target.value)}
-            />
+            <p className='profileP'>-= Profile URL =-</p>
+            <div className='inputGrid'>
+              <div className='SpaceBlock' />
+              <input
+                type='text'
+                onChange={(e) => setProfileImage(e.target.value)}
+                placeholder='Profile URL..'
+              />
+              <div className='SpaceBlock' />
+            </div>
           </label>
-          <button className='submitButton' type='submit'>
+          <button className='registerButton' type='submit'>
             Register
           </button>
         </form>

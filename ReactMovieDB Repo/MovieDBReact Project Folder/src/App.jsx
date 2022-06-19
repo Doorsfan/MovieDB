@@ -13,7 +13,7 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import ProfilePage from './components/ProfilePage';
 import CreateNewGroupPage from './components/createNewGroupPage';
-import GroupPage from './components/GroupPage';
+import GroupPage from './components/ArticlePage';
 import CreateNewThreadPage from './components/createNewThreadPage';
 import ThreadPage from './components/ThreadPage';
 import GroupListingPage from './components/GroupListingPage';
@@ -29,7 +29,7 @@ export default function App() {
           <Route exact path='/Login' element={<LoginPage />} />
           <Route exact path='/Register' element={<RegisterPage />} />
           <Route exact path='/Profile/:profileName' element={<ProfilePage />} />
-          <Route exact path='/Threads/:groupName' element={<GroupPage />} />
+          <Route exact path='/Article/:movieName' element={<GroupPage />} />
           <Route
             exact
             path='/createNewGroup'

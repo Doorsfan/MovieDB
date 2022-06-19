@@ -10,6 +10,19 @@ body {
   text-align: center;
 }
 
+.logOutText{
+  margin-right: 20px;
+}
+
+.profileText{
+  margin-top: -15px;
+  margin-left: 10px;
+}
+
+.myProfileText{
+  color: white;
+  margin-top: -5px;
+}
 .homeLogo {
   width: 45px;
   height: 45px;
@@ -237,8 +250,107 @@ main {
   width: max-content;
 }
 
+.movieTitleDiv{
+  font-size: 30px;
+  width: max-content;
+  display: inline-block;
+  position: relative;
+  top: -45px;
+  left: 15px;
+}
+
+.starsDiv{
+  position: relative;
+  top: -23px;
+  color: white;
+}
+
+.starRatingDiv{
+  display: inline-block;
+  margin-left: 3px;
+  position: relative;
+  top: -6px;
+}
+
+.StarsText{
+  width: max-content;
+  display: inline-block;
+}
+
+.starDiv{
+  width: max-content;
+}
+
+.plotSummary{
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.summaryText{
+  background-color: white;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.rolesGrid{
+  display: grid;
+  grid-template-columns: 10px max-content auto max-content 50px;
+  color: white;
+}
+
+.articleMain{
+  background-color:#ff1c1c;
+}
+
+.actorsAndRolesDiv{
+  width: max-content;
+}
+
+.ageRatingDiv{
+  width: max-content;
+}
+
+.actorsAndStarsGrid{
+  display: grid;
+  grid-template-columns: 10px max-content auto max-content 10px max-content 10px max-content 35px;
+  color: white;
+}
+
+.starsDiv{
+  width: max-content;
+  text-align: center;
+}
+
+.starRatingImage{
+  width: 25px;
+  height: 25px;
+}
+.tagsGrid{
+  display: grid;
+  grid-template-columns: 10px max-content 10px max-content 10px max-content auto;
+  position: relative;
+  left: 50px;
+  top: -40px;
+}
+
+.movieTag{
+  background-color: black;
+  color: white;
+  width: max-content;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 30px;
+}
+
+.articleImage{
+  width: 50px;
+  height: 70px;
+}
+
 .header {
-  height: 50px;
+  height: 70px;
   background-color: #ff1c1c;
   color: white;
   padding-top: 20px;
@@ -445,19 +557,34 @@ main {
   text-align: center;
 }
 
-.logOutText {
-  position: relative;
-  left: -30px;
+.ProfileIcon{
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  margin-left: 10px;
+}
+
+.logOutTextStartPage{
+  margin-left: 10px;
+}
+
+.profileTextStartPage{
+  color: white;
 }
 .profileText {
   width: max-content;
   position: relative;
   left: -20px;
 }
+.ArticleLink{
+  color: black;
+  text-decoration: none;
+}
 .profileLink {
   text-decoration: none;
   color: black;
   width: 80px;
+  margin-left: 5px;
 }
 .ForumText {
   font-size: 40px;

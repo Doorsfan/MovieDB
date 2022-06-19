@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import placeholder from '/images/placeholder.png';
+import ProfileIcon from '/images/profile.png';
 import starLogo from '/images/star.png';
+import SearchLogo from '/images/glass.png';
 
 // a subclass to FetchHelper
 import Thread from '../utilities/Thread';
@@ -125,7 +127,7 @@ export default function StartPage() {
     (async () => {
       let myArticles = [];
       let newArticle = {
-        title: 'bla',
+        title: 'Pirates of The Caribbean',
         rating: 4.3,
         created: '2022-10-02',
         firstTag: 'Action',
@@ -197,16 +199,16 @@ export default function StartPage() {
             </Link>
           </div>
         )}
-        {loggedIn && (
-          <div onClick={logout} className='logOutText'>
-            Logout
-          </div>
-        )}
+
         {loggedIn && (
           <div className='profileText'>
             <Link className='profileLink' to={`/Profile/${loggedInUsername}`}>
-              My Profile
+              <img className='ProfileIcon' src={ProfileIcon} />
+              <div className='profileTextStartPage'>My Profile</div>
             </Link>
+            <div onClick={logout} className='logOutTextStartPage'>
+              Logout
+            </div>
           </div>
         )}
       </div>
@@ -214,42 +216,48 @@ export default function StartPage() {
         <div className='SpaceBlock' />
         <input type='text' className='searchBar' placeholder='Search..' />
         <div className='SpaceBlock' />
-        <img className='SearchIcon' src={placeholder} />
+        <img className='SearchIcon' src={SearchLogo} />
         <div className='SpaceBlock' />
       </div>
       <main className='startPageBody'>
         {movieArticles.length > 0 &&
           movieArticles.map(
             ({ id, title, rating, created, firstTag, secondTag, thirdTag }) => (
-              <div className='movieArticle' key={id}>
-                <div className='movieImageLogoDiv'>
-                  <div className='SpaceBlock' />
-                  <img
-                    className='movieImageLogo'
-                    src={placeholder}
-                    alt='Home'
-                  />
-                  <div className='SpaceBlock' />
-                  <div className='movieTitleDiv'>{title}</div>
-                  <div className='SpaceBlock' />
-                  <div className='createdDate'>{created}</div>
-                  <div className='SpaceBlock' />
-                </div>
-                <div className='ratingDiv'>
-                  <div className='SpaceBlock' />
-                  <div className='ratingDiv'>
-                    <img className='starImageLogo' src={starLogo} alt='Star' />
-                    <div className='ratingText'>{rating}/5</div>
+              <Link className='ArticleLink' to={`/Article/${title}`}>
+                <div className='movieArticle' key={id}>
+                  <div className='movieImageLogoDiv'>
+                    <div className='SpaceBlock' />
+                    <img
+                      className='movieImageLogo'
+                      src={placeholder}
+                      alt='Home'
+                    />
+                    <div className='SpaceBlock' />
+                    <div className='movieTitleDiv'>{title}</div>
+                    <div className='SpaceBlock' />
+                    <div className='createdDate'>{created}</div>
+                    <div className='SpaceBlock' />
                   </div>
-                  <div className='SpaceBlock' />
-                  <div className='firstTagDiv'>{firstTag}</div>
-                  <div className='SpaceBlock' />
-                  <div className='secondTagDiv'>{secondTag}</div>
-                  <div className='SpaceBlock' />
-                  <div className='thirdTagDiv'>{thirdTag}</div>
-                  <div className='SpaceBlock' />
+                  <div className='ratingDiv'>
+                    <div className='SpaceBlock' />
+                    <div className='ratingDiv'>
+                      <img
+                        className='starImageLogo'
+                        src={starLogo}
+                        alt='Star'
+                      />
+                      <div className='ratingText'>{rating}/5</div>
+                    </div>
+                    <div className='SpaceBlock' />
+                    <div className='firstTagDiv'>{firstTag}</div>
+                    <div className='SpaceBlock' />
+                    <div className='secondTagDiv'>{secondTag}</div>
+                    <div className='SpaceBlock' />
+                    <div className='thirdTagDiv'>{thirdTag}</div>
+                    <div className='SpaceBlock' />
+                  </div>
                 </div>
-              </div>
+              </Link>
             )
           )}
       </main>

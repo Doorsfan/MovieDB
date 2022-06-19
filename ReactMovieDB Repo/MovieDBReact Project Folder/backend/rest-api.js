@@ -317,6 +317,26 @@ module.exports = function setupRESTapi(app, databaseConnection) {
     }
   });
 
+  app.get('/api/getInfoForMovie/:title', (req, res) => {
+    console.log('hi');
+    try {
+      console.log('Came in here');
+      let relevantGroup = db.prepare(
+        `SELECT * FROM Movie WHERE Movie.title = :title`
+      );
+      let relevantMovie = relevantGroup.all({
+        title: req.params['title'],
+      })[0];
+      console.log(relevantMovie);
+      res.status(200);
+      res.json(relevantMovie);
+    } catch (e) {
+      res.status(403);
+      console.log(e);
+      res.json('Found no movie by that name');
+    }
+  });
+
   app.get('/api/getThreadsForGroup/:name', (req, res) => {
     try {
       if (!seeIfIAmLoggedIn(req)) {

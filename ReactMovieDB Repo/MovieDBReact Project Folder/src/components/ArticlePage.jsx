@@ -14,6 +14,7 @@ import {
 import homeLogo from '/images/home.png';
 import ProfileIcon from '/images/profile.png';
 import StarImage from '/images/star.png';
+import BlackStar from '/images/black_star.png';
 
 // a "lazy"/automatically created subclass to FetchHelper
 import { factory } from '../utilities/FetchHelper';
@@ -37,8 +38,51 @@ export default function GroupPage() {
   const [secondActor, setSecondActor] = useState('');
   const [thirdActor, setThirdActor] = useState('');
   const [summary, setSummary] = useState('');
+  const [review, setReview] = useState('');
+  const [reviewRating, setReviewRating] = useState(1);
+  const [relevantReviews, setRelevantReviews] = useState([]);
 
   let navigate = useNavigate();
+
+  function createNewReview() {
+    fetch(`/api/whoAmI`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(async (data) => {
+      let authorResult = await data.json();
+
+      let threadInfo = {
+        author: authorResult,
+        content: review,
+        rating: reviewRating,
+      };
+
+      fetch('/api/postNewReview/' + window.location.pathname.split('/')[2], {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(threadInfo),
+      }).then(async (data) => {
+        let myThread = await data.json();
+      });
+
+      fetch(
+        '/api/getAllReviewsForMovie/' + window.location.pathname.split('/')[2],
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then(async (data) => {
+        let allReviews = await data.json();
+        setRelevantReviews(allReviews);
+      });
+    });
+  }
 
   function logout() {
     fetch(`/api/logout`, {
@@ -102,6 +146,20 @@ export default function GroupPage() {
           setSecondActor(result.secondActor);
           setThirdActor(result.thirdActor);
           setSummary(result.summary);
+
+          fetch(
+            '/api/getAllReviewsForMovie/' +
+              window.location.pathname.split('/')[2],
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          ).then(async (data) => {
+            let allReviews = await data.json();
+            setRelevantReviews(allReviews);
+          });
         });
       });
     })();
@@ -183,12 +241,110 @@ export default function GroupPage() {
           <div className='ageRatingDiv'>Age Rating: {ageRating}</div>
           <div className='SpaceBlock' />
         </div>
-        <div className='plotSummary'>
-          Plot Summary
-        </div>
-        <div className='summaryText'>
-          {summary}
-        </div>
+        <div className='plotSummary'>Plot Summary</div>
+        <div className='summaryText'>{summary}</div>
+        <div className='ReviewText'>Reviews</div>
+        {relevantReviews.length > 0 &&
+          relevantReviews.map(({ id, author, content, rating, movieName }) => (
+            <div className='articleReview' key={id}>
+              {author}
+              {content}
+              {rating}
+              {movieName}
+            </div>
+          ))}
+        {loggedIn && (
+          <div className='PostReviewDiv'>
+            <textarea
+              onChange={(e) => setReview(e.target.value)}
+              className='reviewInput'
+              rows='5'
+              cols='50'
+              placeholder='What did you think about the movie?'
+            ></textarea>
+          </div>
+        )}
+        {loggedIn && (
+          <div className='PostReviewButtonDiv'>
+            <img
+              className='StarLogo'
+              onClick={() => setReviewRating(1)}
+              src={StarImage}
+              alt='Home'
+            />
+            {reviewRating > 1 && (
+              <img
+                className='StarLogo'
+                onClick={() => setReviewRating(2)}
+                src={StarImage}
+                alt='Home'
+              />
+            )}
+            {reviewRating > 2 && (
+              <img
+                className='StarLogo'
+                onClick={() => setReviewRating(3)}
+                src={StarImage}
+                alt='Home'
+              />
+            )}
+            {reviewRating > 3 && (
+              <img
+                className='StarLogo'
+                onClick={() => setReviewRating(4)}
+                src={StarImage}
+                alt='Home'
+              />
+            )}
+            {reviewRating > 4 && (
+              <img
+                className='StarLogo'
+                onClick={() => setReviewRating(5)}
+                src={StarImage}
+                alt='Home'
+              />
+            )}
+            {reviewRating < 2 && (
+              <img
+                onClick={() => setReviewRating(2)}
+                className='StarLogo'
+                src={BlackStar}
+                alt='Home'
+              />
+            )}
+            {reviewRating < 3 && (
+              <img
+                className='StarLogo'
+                onClick={() => setReviewRating(3)}
+                src={BlackStar}
+                alt='Home'
+              />
+            )}
+            {reviewRating < 4 && (
+              <img
+                onClick={() => setReviewRating(4)}
+                className='StarLogo'
+                src={BlackStar}
+                alt='Home'
+              />
+            )}
+            {reviewRating < 5 && (
+              <img
+                className='StarLogo'
+                onClick={() => setReviewRating(5)}
+                src={BlackStar}
+                alt='Home'
+              />
+            )}
+          </div>
+        )}
+        {loggedIn && (
+          <div className='PostReviewButtonDiv'>
+            <button onClick={createNewReview} value='Post Review'>
+              Post Review
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );

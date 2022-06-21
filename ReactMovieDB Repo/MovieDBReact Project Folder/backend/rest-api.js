@@ -185,6 +185,45 @@ module.exports = function setupRESTapi(app, databaseConnection) {
     }
   });
 
+  app.get('/api/getAllReviewsForMovie/:movieName', (req, res) => {
+    try {
+      if (!seeIfIAmLoggedIn(req)) {
+        throw 'Have to be logged in for that.';
+      }
+
+      let allReviewsRequest = db.prepare(
+        `SELECT * FROM Review WHERE movieName = :movieName`
+      );
+      let movieReviewsResult = allReviewsRequest.all({
+        movieName: req.params['movieName']
+      });
+      res.status(200);
+      res.json(movieReviewsResult);
+    } catch (e) {}
+  })
+
+  app.post('/api/postNewReview/:movieName', (req, res) => {
+    try {
+      if (!seeIfIAmLoggedIn(req)) {
+        throw 'Have to be logged in for that.';
+      }
+
+      let newReview = db.prepare(
+        `INSERT INTO Review (id, author, content, rating, movieName) VALUES (NULL, :author, :content, :rating, :movieName)`
+      );
+      let createNewReviewResult = newReview.run({
+        author: req.session.user.username,
+        content: req.body.content,
+        rating: req.body.rating,
+        movieName: req.params['movieName']
+      });
+      
+    }
+    catch (e) {
+      
+    }
+  })
+
   app.post('/api/createInvite', (req, res) => {
     try {
       if (!seeIfIAmLoggedIn(req)) {

@@ -281,10 +281,44 @@ main {
   width: max-content;
 }
 
+.ReviewText{
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  text-decoration: underline;
+}
+
+.articleReview {
+  background-color: white;
+}
+
+.StarLogo{
+  width: 30px;
+  height: 30px;
+}
+
+.reviewInput{
+  padding-left: 5px;
+}
+
+.PostReviewDiv{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.PostReviewButtonDiv{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
 .plotSummary{
   text-align: center;
   text-decoration: underline;
   margin-bottom: 10px;
+  color: white;
 }
 
 .summaryText{

@@ -10,9 +10,22 @@ import {
 import FetchHelper from '../utilities/FetchHelper';
 import UserGroup from '../utilities/UserGroup';
 
-export default function CreateNewGroupPage() {
-  const [description, setDescription] = useState();
-  const [name, setName] = useState();
+export default function CreateNewArticlePage() {
+  const [title, setTitle] = useState();
+  const [imageURL, setImageURL] = useState();
+  const [firstTag, setFirstTag] = useState();
+  const [secondTag, setSecondTag] = useState();
+  const [thirdTag, setThirdTag] = useState();
+  const [firstActor, setFirstActor] = useState();
+  const [secondActor, setSecondActor] = useState();
+  const [thirdActor, setThirdActor] = useState();
+  const [firstRole, setFirstRole] = useState();
+  const [secondRole, setSecondRole] = useState();
+  const [thirdRole, setThirdRole] = useState();
+  const [rating, setRating] = useState();
+  const [ageRating, setAgeRating] = useState();
+  const [summary, setSummary] = useState();
+  const [author, setAuthor] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +35,7 @@ export default function CreateNewGroupPage() {
       name: name,
     };
 
-    fetch('/api/createNewGroup', {
+    fetch('/api/createNewArticle', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +44,7 @@ export default function CreateNewGroupPage() {
     }).then(async (data) => {
       let myGroupResult = await data.json();
 
-      if (myGroupResult != 'Failed to create the group.') {
+      if (myGroupResult != 'Failed to create the Article.') {
         window.location = '/';
       }
     });

@@ -32,8 +32,8 @@ export default function App() {
           <Route exact path='/Article/:movieName' element={<GroupPage />} />
           <Route
             exact
-            path='/createNewGroup'
-            element={<CreateNewGroupPage />}
+            path='/createNewArticle'
+            element={<CreateNewArticlePage />}
           />
           <Route
             exact

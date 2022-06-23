@@ -66,6 +66,11 @@ export default function ProfilePage() {
       {username && <div className='usernameText'>Username: {username}</div>}
       {myArticles.length > 0 && (
         <div className='articlesText'>
+          <div className='createNewArticleLinkDiv'>
+            <Link className='createNewArticleLink' to='/createNewArticle'>
+              Create New Article
+            </Link>
+          </div>
           <div className='myArticlesText'>My Articles</div>
           {myArticles.length > 0 &&
             myArticles.map(

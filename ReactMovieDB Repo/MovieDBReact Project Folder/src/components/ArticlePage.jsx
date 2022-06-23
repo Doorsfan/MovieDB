@@ -15,6 +15,8 @@ import homeLogo from '/images/home.png';
 import ProfileIcon from '/images/profile.png';
 import StarImage from '/images/star.png';
 import BlackStar from '/images/black_star.png';
+import ReviewStar from '/images/white_star.png';
+import EmptyReviewStar from '/images/empty_star.png';
 
 // a "lazy"/automatically created subclass to FetchHelper
 import { factory } from '../utilities/FetchHelper';
@@ -108,6 +110,18 @@ export default function GroupPage() {
   // Run this when our component mounts (we can see it on screen)
   useEffect(() => {
     (async () => {
+      fetch(
+        '/api/getAllReviewsForMovie/' + window.location.pathname.split('/')[2],
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then(async (data) => {
+        let allReviews = await data.json();
+        setRelevantReviews(allReviews);
+      });
       fetch(`/api/whoAmI`, {
         method: 'GET',
         headers: {
@@ -121,6 +135,18 @@ export default function GroupPage() {
           setLoggedIn(true);
         }
 
+        let result = await (await fetch('/api/login')).json();
+        if (result) {
+          fetch(`/api/loggedInUsersUsername`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }).then(async (data) => {
+            let result = await data.json();
+            setLoggedInUsername(result);
+          });
+        }
         fetch(
           `/api/getInfoForMovie/` + window.location.pathname.split('/')[2],
           {
@@ -146,20 +172,6 @@ export default function GroupPage() {
           setSecondActor(result.secondActor);
           setThirdActor(result.thirdActor);
           setSummary(result.summary);
-
-          fetch(
-            '/api/getAllReviewsForMovie/' +
-              window.location.pathname.split('/')[2],
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            }
-          ).then(async (data) => {
-            let allReviews = await data.json();
-            setRelevantReviews(allReviews);
-          });
         });
       });
     })();
@@ -198,7 +210,7 @@ export default function GroupPage() {
       </div>
       <main className='articleMain'>
         <img className='articleImage' src={imageURL} />
-        <div className='movieTitleDiv'>{title}</div>
+        <div className='articleMovieTitleDiv'>{title}</div>
         <div className='tagsGrid'>
           <div className='SpaceBlock' />
           <div className='firstTag movieTag'>{firstTag}</div>
@@ -247,10 +259,91 @@ export default function GroupPage() {
         {relevantReviews.length > 0 &&
           relevantReviews.map(({ id, author, content, rating, movieName }) => (
             <div className='articleReview' key={id}>
-              {author}
-              {content}
-              {rating}
-              {movieName}
+              <div className='authorNameGrid'>
+                <div className='SpaceBlock'></div>
+                <div className='authorNameDiv'>{author}</div>
+                <div className='SpaceBlock'></div>
+                <div className='ReviewRatingDiv'>
+                  <img
+                    className='ReviewStarLogo'
+                    onClick={() => setReviewRating(1)}
+                    src={ReviewStar}
+                    alt='Home'
+                  />
+                  {rating > 1 && (
+                    <img
+                      className='ReviewStarLogo'
+                      onClick={() => setReviewRating(2)}
+                      src={ReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating > 2 && (
+                    <img
+                      className='ReviewStarLogo'
+                      onClick={() => setReviewRating(3)}
+                      src={ReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating > 3 && (
+                    <img
+                      className='ReviewStarLogo'
+                      onClick={() => setReviewRating(4)}
+                      src={ReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating > 4 && (
+                    <img
+                      className='ReviewStarLogo'
+                      onClick={() => setReviewRating(5)}
+                      src={ReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating < 2 && (
+                    <img
+                      onClick={() => setReviewRating(2)}
+                      className='ReviewStarLogo'
+                      src={EmptyReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating < 3 && (
+                    <img
+                      className='ReviewStarLogo'
+                      onClick={() => setReviewRating(3)}
+                      src={EmptyReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating < 4 && (
+                    <img
+                      onClick={() => setReviewRating(4)}
+                      className='ReviewStarLogo'
+                      src={EmptyReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                  {rating < 5 && (
+                    <img
+                      className='ReviewStarLogo'
+                      onClick={() => setReviewRating(5)}
+                      src={EmptyReviewStar}
+                      alt='Home'
+                    />
+                  )}
+                </div>
+                <div className='SpaceBlock'></div>
+              </div>
+              <div className='reviewContent'>
+                <div className='SpaceBlock'></div>
+                <img className='profileIconImage' src={ProfileIcon}></img>
+                <div className='SpaceBlock'></div>
+                <div className='contentDiv'>{content}</div>
+                <div className='SpaceBlock'></div>
+              </div>
             </div>
           ))}
         {loggedIn && (

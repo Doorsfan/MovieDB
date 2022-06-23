@@ -29,6 +29,7 @@ export default function LoginPage() {
       body: JSON.stringify(credentials),
     }).then(async (data) => {
       let myUser = await data.json();
+      console.log(myUser);
       if (myUser._error) {
         alert('Incorrect credentials.');
       } else if (myUser.needToUpdate) {
@@ -49,7 +50,7 @@ export default function LoginPage() {
         <div className='SpaceBlock' />
         <div className='homeText'>
           <Link className='homeLink' to='/'>
-            <img className='homeLogo' src={homeLogo} alt="Home" />
+            <img className='homeLogo' src={homeLogo} alt='Home' />
           </Link>
         </div>
         <div className='SpaceBlock' />
@@ -58,9 +59,7 @@ export default function LoginPage() {
         <div className='homeText'></div>
       </div>
       <div>
-        <div className='loginText'>
-          --===  Login  ===--
-        </div>
+        <div className='loginText'>--=== Login ===--</div>
       </div>
       <div>
         <form onSubmit={handleSubmit} className='loginForm'>

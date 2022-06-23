@@ -36,6 +36,7 @@ module.exports = function (app, db) {
       res.json({ _error: 'Not allowed' });
     }
     req.body.password = passwordEncryptor(req.body.password);
+    console.log(req.body.password);
 
     let stmt = db.prepare(`
       SELECT * FROM users
@@ -81,7 +82,8 @@ module.exports = function (app, db) {
       result.needToUpdate =
         'You last changed your password more than 21 days ago. You must update it.';
     }
-
+    console.log("Got here");
+    console.log(result);
     let insertIntoSession = db.prepare(`
       INSERT INTO activeSession (id, userId) VALUES (NULL, '${result.id}')
     `);

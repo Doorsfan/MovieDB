@@ -194,6 +194,38 @@ h3 {
   border-radius: 15px;
 }
 
+.myArticlesText{
+  width: max-content;
+  border-radius: 30px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileMovieTitleDiv{
+  text-align: left;
+  color: black;
+  margin-top: 12px;
+}
+
+.articlesText{
+  text-align: center;
+}
+
+.myArticlesText{
+  background-color: #ff1c1c;
+}
+
+.profileMovieArticle{
+  background-color: #ff1c1c;
+  padding-bottom: 15px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .startPageBody {
   background-color: black;
 }
@@ -250,12 +282,20 @@ main {
   width: max-content;
 }
 
-.movieTitleDiv{
-  font-size: 30px;
+.articleMovieTitleDiv{
+  font-size: 22px;
   width: max-content;
   display: inline-block;
   position: relative;
+  left: 15px;
   top: -45px;
+}
+
+.movieTitleDiv{
+  font-size: 22px;
+  width: max-content;
+  display: inline-block;
+  position: relative;
   left: 15px;
 }
 
@@ -281,15 +321,57 @@ main {
   width: max-content;
 }
 
+.profileArticle{
+  color: white;
+}
+
+.articlesText{
+  color: white;
+}
+
 .ReviewText{
   text-align: center;
   font-size: 24px;
   color: white;
   text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.reviewContent{
+  display: grid;
+  grid-template-columns: 15px max-content 15px max-content auto;
+}
+
+.profileIconImage{
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.ReviewStarLogo{
+  width: 30px;
+  height: 30px;
+}
+
+.contentDiv{
+  margin-top: 7px;
+}
+
+.authorNameDiv{
+  margin-top: 5px;
+}
+
+.authorNameGrid{
+  display: grid;
+  grid-template-columns: 25px max-content 10px max-content;
+  padding-top: 10px;
 }
 
 .articleReview {
   background-color: white;
+  padding-bottom: 10px;
+  border-radius: 30px;
+  margin-bottom: 10px;
 }
 
 .StarLogo{

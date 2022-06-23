@@ -8,11 +8,13 @@ import {
   useParams,
 } from 'react-router-dom';
 import FetchHelper from '../utilities/FetchHelper';
+import placeholder from '/images/placeholder.png';
+import starLogo from '/images/star.png';
 
 export default function ProfilePage() {
   const [userRole, setUserRole] = useState();
   const [username, setUserName] = useState();
-  const [userGroups, setUserGroups] = useState();
+  const [myArticles, setMyArticles] = useState([]);
 
   let navigate = useNavigate();
 
@@ -25,17 +27,19 @@ export default function ProfilePage() {
           'Content-Type': 'application/json',
         },
       }).then(async (data) => {
-        let relevantInfo = await data.json();
-        setUserName(relevantInfo.username);
-      });
-      fetch(`/api/getGroupsIAmPartOf`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(async (data) => {
-        let relevantInfo = await data.json();
-        setUserGroups(relevantInfo);
+        let relevantUserInfo = await data.json();
+        setUserName(relevantUserInfo.username);
+
+        fetch(`/api/getMyArticles/` + relevantUserInfo.username, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then(async (data) => {
+          let relevantInfo = await data.json();
+
+          setMyArticles(relevantInfo);
+        });
       });
     })();
   }, []);
@@ -60,20 +64,57 @@ export default function ProfilePage() {
       </div>
       {userRole && <div className='roleText'>Site Role: {userRole}</div>}
       {username && <div className='usernameText'>Username: {username}</div>}
-      {userGroups && (
-        <div className='groupsText'>
-          Groups:
-          {userGroups.map((item) => (
-            <div
-              className='groupItemInProfile'
-              onClick={() => {
-                navigate('../../memberListing/' + item);
-              }}
-              key={item}
-            >
-              <div className='group'>{item}</div>
-            </div>
-          ))}
+      {myArticles.length > 0 && (
+        <div className='articlesText'>
+          <div className='myArticlesText'>My Articles</div>
+          {myArticles.length > 0 &&
+            myArticles.map(
+              ({
+                id,
+                title,
+                created,
+                Rating,
+                firstTag,
+                secondTag,
+                thirdTag,
+              }) => (
+                <Link className='ArticleLink' to={`/Article/${title}`}>
+                  <div className='profileMovieArticle' key={id}>
+                    <div className='movieImageLogoDiv'>
+                      <div className='SpaceBlock' />
+                      <img
+                        className='movieImageLogo'
+                        src={placeholder}
+                        alt='Home'
+                      />
+                      <div className='SpaceBlock' />
+                      <div className='profileMovieTitleDiv'>{title}</div>
+                      <div className='SpaceBlock' />
+                      <div className='createdDate'>{created}</div>
+                      <div className='SpaceBlock' />
+                    </div>
+                    <div className='ratingDiv'>
+                      <div className='SpaceBlock' />
+                      <div className='ratingDiv'>
+                        <img
+                          className='starImageLogo'
+                          src={starLogo}
+                          alt='Star'
+                        />
+                        <div className='ratingText'>{Rating}/5</div>
+                      </div>
+                      <div className='SpaceBlock' />
+                      <div className='firstTagDiv'>{firstTag}</div>
+                      <div className='SpaceBlock' />
+                      <div className='secondTagDiv'>{secondTag}</div>
+                      <div className='SpaceBlock' />
+                      <div className='thirdTagDiv'>{thirdTag}</div>
+                      <div className='SpaceBlock' />
+                    </div>
+                  </div>
+                </Link>
+              )
+            )}
         </div>
       )}
     </div>

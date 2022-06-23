@@ -222,7 +222,16 @@ export default function StartPage() {
       <main className='startPageBody'>
         {movieArticles.length > 0 &&
           movieArticles.map(
-            ({ id, title, rating, created, firstTag, secondTag, thirdTag }) => (
+            ({
+              id,
+              title,
+              imageURL,
+              rating,
+              created,
+              firstTag,
+              secondTag,
+              thirdTag,
+            }) => (
               <Link className='ArticleLink' to={`/Article/${title}`}>
                 <div className='movieArticle' key={id}>
                   <div className='movieImageLogoDiv'>

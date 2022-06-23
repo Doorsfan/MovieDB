@@ -685,6 +685,26 @@ module.exports = function setupRESTapi(app, databaseConnection) {
     }
   });
 
+  app.get('/api/getMyArticles/:author', (req, res) => {
+    try {
+      if (!seeIfIAmLoggedIn(req)) {
+        throw 'Have to be logged in for that.';
+      }
+      console.log("Stage 1")
+      let relevantReviews = db.prepare(
+        `SELECT * FROM Movie WHERE Movie.author = :author`
+      );
+      let myArticles = relevantReviews.all({
+        author: req.params['author'],
+      });
+      console.log(myArticles);
+      res.json(myArticles);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  })
+
   app.get('/api/canIPostInThisGroup/:groupName', (req, res) => {
     try {
       if (!seeIfIAmLoggedIn(req)) {

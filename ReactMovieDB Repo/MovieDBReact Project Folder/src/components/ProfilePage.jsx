@@ -57,11 +57,6 @@ export default function ProfilePage() {
           </Link>
         </div>
       </div>
-      <div className='createNewGroupDiv'>
-        <Link className='createNewGroupLink' to='/createNewGroup'>
-          Create New Group
-        </Link>
-      </div>
       {userRole && <div className='roleText'>Site Role: {userRole}</div>}
       {username && <div className='usernameText'>Username: {username}</div>}
       {myArticles.length > 0 && (

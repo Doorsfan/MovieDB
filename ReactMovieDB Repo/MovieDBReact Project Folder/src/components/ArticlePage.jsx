@@ -1,16 +1,6 @@
 import { useState, useEffect } from 'react';
 
-// a subclass to FetchHelper
-import Thread from '../utilities/Thread';
-import UserGroup from '../utilities/UserGroup';
-import LoginPage from './LoginPage';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Link, useNavigate } from 'react-router-dom';
 import homeLogo from '/images/home.png';
 import ProfileIcon from '/images/profile.png';
 import StarImage from '/images/star.png';
@@ -23,7 +13,7 @@ import { factory } from '../utilities/FetchHelper';
 
 const { Book, Author } = factory;
 
-export default function GroupPage() {
+export default function ArticlePage() {
   const [imageURL, setImageURL] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [title, setTitle] = useState('');
@@ -99,14 +89,6 @@ export default function GroupPage() {
     });
   }
 
-  function goToCreateThreadPage() {
-    navigate('/CreateNewThread/' + window.location.pathname.split('/')[2]);
-  }
-
-  function goToThread(threadName) {
-    navigate('/postsForThread/' + threadName);
-  }
-
   // Run this when our component mounts (we can see it on screen)
   useEffect(() => {
     (async () => {
@@ -157,7 +139,7 @@ export default function GroupPage() {
           }
         ).then(async (data) => {
           let result = await data.json();
-          console.log(result);
+
           setImageURL(result.imageURL);
           setTitle(result.title);
           setFirstTag(result.firstTag);

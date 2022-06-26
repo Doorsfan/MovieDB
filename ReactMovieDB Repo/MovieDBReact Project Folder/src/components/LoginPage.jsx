@@ -29,7 +29,6 @@ export default function LoginPage() {
       body: JSON.stringify(credentials),
     }).then(async (data) => {
       let myUser = await data.json();
-      console.log(myUser);
       if (myUser._error) {
         alert('Incorrect credentials.');
       } else if (myUser.needToUpdate) {

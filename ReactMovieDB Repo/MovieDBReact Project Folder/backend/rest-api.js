@@ -112,7 +112,6 @@ module.exports = function setupRESTapi(app, databaseConnection) {
 
   app.post('/api/createNewThread', (req, res) => {
     try {
-      console.log(req.session.user);
       if (req.session?.user) {
         let relevantGroup = db.prepare(
           `SELECT * FROM userGroup WHERE userGroup.name = :name`
@@ -357,16 +356,13 @@ module.exports = function setupRESTapi(app, databaseConnection) {
   });
 
   app.get('/api/getInfoForMovie/:title', (req, res) => {
-    console.log('hi');
     try {
-      console.log('Came in here');
       let relevantGroup = db.prepare(
         `SELECT * FROM Movie WHERE Movie.title = :title`
       );
       let relevantMovie = relevantGroup.all({
         title: req.params['title'],
       })[0];
-      console.log(relevantMovie);
       res.status(200);
       res.json(relevantMovie);
     } catch (e) {
@@ -690,14 +686,14 @@ module.exports = function setupRESTapi(app, databaseConnection) {
       if (!seeIfIAmLoggedIn(req)) {
         throw 'Have to be logged in for that.';
       }
-      console.log("Stage 1")
+
       let relevantReviews = db.prepare(
         `SELECT * FROM Movie WHERE Movie.author = :author`
       );
       let myArticles = relevantReviews.all({
         author: req.params['author'],
       });
-      console.log(myArticles);
+
       res.json(myArticles);
     }
     catch (e) {

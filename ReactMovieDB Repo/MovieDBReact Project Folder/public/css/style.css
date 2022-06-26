@@ -10,16 +10,16 @@ body {
   text-align: center;
 }
 
-.logOutText{
+.logOutText {
   margin-right: 20px;
 }
 
-.profileText{
+.profileText {
   margin-top: -15px;
   margin-left: 10px;
 }
 
-.myProfileText{
+.myProfileText {
   color: white;
   margin-top: -5px;
 }
@@ -53,7 +53,7 @@ h3 {
 }
 
 .registerButton {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   margin-left: auto;
   margin-right: auto;
   width: max-content;
@@ -194,7 +194,7 @@ h3 {
   border-radius: 15px;
 }
 
-.myArticlesText{
+.myArticlesText {
   width: max-content;
   border-radius: 30px;
   padding: 10px;
@@ -202,21 +202,21 @@ h3 {
   margin-right: auto;
 }
 
-.profileMovieTitleDiv{
+.profileMovieTitleDiv {
   text-align: left;
   color: black;
   margin-top: 12px;
 }
 
-.articlesText{
+.articlesText {
   text-align: center;
 }
 
-.myArticlesText{
+.myArticlesText {
   background-color: #ff1c1c;
 }
 
-.profileMovieArticle{
+.profileMovieArticle {
   background-color: #ff1c1c;
   padding-bottom: 15px;
   border-radius: 15px;
@@ -282,12 +282,12 @@ main {
   width: max-content;
 }
 
-.createNewArticleLink{
+.createNewArticleLink {
   text-decoration: none;
   color: white;
 }
 
-.createNewArticleLinkDiv{
+.createNewArticleLinkDiv {
   background-color: red;
   width: max-content;
   padding: 15px;
@@ -297,7 +297,7 @@ main {
   margin-bottom: 10px;
 }
 
-.articleMovieTitleDiv{
+.articleMovieTitleDiv {
   font-size: 22px;
   width: max-content;
   display: inline-block;
@@ -306,7 +306,7 @@ main {
   top: -45px;
 }
 
-.movieTitleDiv{
+.movieTitleDiv {
   font-size: 22px;
   width: max-content;
   display: inline-block;
@@ -314,37 +314,37 @@ main {
   left: 15px;
 }
 
-.starsDiv{
+.starsDiv {
   position: relative;
   top: -23px;
   color: white;
 }
 
-.starRatingDiv{
+.starRatingDiv {
   display: inline-block;
   margin-left: 3px;
   position: relative;
   top: -6px;
 }
 
-.StarsText{
+.StarsText {
   width: max-content;
   display: inline-block;
 }
 
-.starDiv{
+.starDiv {
   width: max-content;
 }
 
-.profileArticle{
+.profileArticle {
   color: white;
 }
 
-.articlesText{
+.articlesText {
   color: white;
 }
 
-.ReviewText{
+.ReviewText {
   text-align: center;
   font-size: 24px;
   color: white;
@@ -352,31 +352,31 @@ main {
   margin-bottom: 10px;
 }
 
-.reviewContent{
+.reviewContent {
   display: grid;
   grid-template-columns: 15px max-content 15px max-content auto;
 }
 
-.profileIconImage{
+.profileIconImage {
   width: 40px;
   height: 40px;
   border-radius: 30px;
 }
 
-.ReviewStarLogo{
+.ReviewStarLogo {
   width: 30px;
   height: 30px;
 }
 
-.contentDiv{
+.contentDiv {
   margin-top: 7px;
 }
 
-.authorNameDiv{
+.authorNameDiv {
   margin-top: 5px;
 }
 
-.authorNameGrid{
+.authorNameGrid {
   display: grid;
   grid-template-columns: 25px max-content 10px max-content;
   padding-top: 10px;
@@ -389,75 +389,75 @@ main {
   margin-bottom: 10px;
 }
 
-.StarLogo{
+.StarLogo {
   width: 30px;
   height: 30px;
 }
 
-.reviewInput{
+.reviewInput {
   padding-left: 5px;
 }
 
-.PostReviewDiv{
+.PostReviewDiv {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
 }
 
-.PostReviewButtonDiv{
+.PostReviewButtonDiv {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
 }
 
-.plotSummary{
+.plotSummary {
   text-align: center;
   text-decoration: underline;
   margin-bottom: 10px;
   color: white;
 }
 
-.summaryText{
+.summaryText {
   background-color: white;
   border-radius: 30px;
   text-align: center;
 }
 
-.rolesGrid{
+.rolesGrid {
   display: grid;
   grid-template-columns: 10px max-content auto max-content 50px;
   color: white;
 }
 
-.articleMain{
-  background-color:#ff1c1c;
+.articleMain {
+  background-color: #ff1c1c;
 }
 
-.actorsAndRolesDiv{
+.actorsAndRolesDiv {
   width: max-content;
 }
 
-.ageRatingDiv{
+.ageRatingDiv {
   width: max-content;
 }
 
-.actorsAndStarsGrid{
+.actorsAndStarsGrid {
   display: grid;
   grid-template-columns: 10px max-content auto max-content 10px max-content 10px max-content 35px;
   color: white;
 }
 
-.starsDiv{
+.starsDiv {
   width: max-content;
   text-align: center;
 }
 
-.starRatingImage{
+.starRatingImage {
   width: 25px;
   height: 25px;
 }
-.tagsGrid{
+.tagsGrid {
   display: grid;
   grid-template-columns: 10px max-content 10px max-content 10px max-content auto;
   position: relative;
@@ -465,7 +465,160 @@ main {
   top: -40px;
 }
 
-.movieTag{
+.publishArticleButton {
+  width: 120px;
+  height: 30px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.HomeLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.StartFooter {
+  background-color: red;
+  height: 80px;
+  position: absolute;
+  bottom: 0px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 40px max-content auto max-content 40px;
+}
+
+.footer {
+  background-color: red;
+  height: 80px;
+  position: relative;
+  top: 103px;
+  display: grid;
+  grid-template-columns: 40px max-content auto max-content 40px;
+}
+
+.ProfileDiv,
+.HomeDiv {
+  margin-top: 7px;
+}
+
+.ProfileLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.summaryInput {
+  width: calc(100% - 10px);
+  padding-left: 10px;
+}
+
+.plotSummaryDiv {
+  text-align: center;
+  text-decoration: underline;
+  color: white;
+}
+
+.movieURLInputDiv {
+  max-width: calc(80vw - 40px);
+}
+
+.movieURLInput {
+  width: calc(80vw - 40px);
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+
+.uploadImageURLButton {
+  width: max-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imageAndUrlGrid {
+  display: grid;
+  grid-template-columns: 10px max-content 10px max-content;
+}
+
+.movieImageHolder {
+  width: 40px;
+  height: 60px;
+}
+
+.publisherName {
+  display: inline-block;
+  margin-left: 10px;
+  position: relative;
+  top: -15px;
+}
+
+.publisherNameAndImage {
+  width: 600px;
+  display: grid;
+  grid-template-columns: 20px max-content 10px max-content auto max-content 20px;
+}
+
+.actorAndRoleDiv {
+  display: grid;
+  grid-template-columns: 10px auto 40px auto 10px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+
+.roleText {
+  width: 100%;
+  text-align: left;
+}
+.actorsAndRoleGrid {
+  display: grid;
+  grid-template-columns: 15px auto 25px auto 10px;
+  margin-top: 20px;
+}
+
+.PublisherText {
+  position: relative;
+  left: 10px;
+  margin-top: 10px;
+}
+
+.ageRatingGrid {
+  display: grid;
+  grid-template-columns: 0px max-content 10px max-content auto;
+  position: relative;
+  left: -10px;
+}
+
+.editMovieTag {
+  background-color: black;
+  width: 200px;
+  padding-top: 1px;
+  padding-left: 15px;
+  height: 28px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  border-radius: 30px;
+}
+
+.publisherProfileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.editTags {
+  background-color: red;
+  height: 80px;
+  width: 220px;
+  border-radius: 30px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 15px;
+}
+
+.movieTag {
   background-color: black;
   color: white;
   width: max-content;
@@ -475,7 +628,7 @@ main {
   border-radius: 30px;
 }
 
-.articleImage{
+.articleImage {
   width: 50px;
   height: 70px;
 }
@@ -487,6 +640,10 @@ main {
   padding-top: 20px;
   display: grid;
   grid-template-columns: 10px auto max-content auto max-content max-content 80px;
+}
+
+.movieTitleInput {
+  width: 100%;
 }
 
 .createNewGroupLink {
@@ -617,17 +774,17 @@ main {
   padding-left: 20px;
 }
 
-.registerFormDiv{
+.registerFormDiv {
   position: relative;
   top: -50px;
 }
 
-.inputGrid{
+.inputGrid {
   display: grid;
   grid-template-columns: auto max-content auto;
 }
 
-.RegisterTitleText{
+.RegisterTitleText {
   text-align: center;
   color: white;
   font-size: 35px;
@@ -688,18 +845,18 @@ main {
   text-align: center;
 }
 
-.ProfileIcon{
+.ProfileIcon {
   width: 40px;
   height: 40px;
   border-radius: 30px;
   margin-left: 10px;
 }
 
-.logOutTextStartPage{
+.logOutTextStartPage {
   margin-left: 10px;
 }
 
-.profileTextStartPage{
+.profileTextStartPage {
   color: white;
 }
 .profileText {
@@ -707,7 +864,7 @@ main {
   position: relative;
   left: -20px;
 }
-.ArticleLink{
+.ArticleLink {
   color: black;
   text-decoration: none;
 }
@@ -731,7 +888,6 @@ main {
   margin-top: -10px;
 }
 
-.roleText,
 .usernameText,
 .groupsText {
   width: max-content;

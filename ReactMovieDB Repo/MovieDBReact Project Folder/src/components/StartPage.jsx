@@ -3,6 +3,7 @@ import placeholder from '/images/placeholder.png';
 import ProfileIcon from '/images/profile.png';
 import starLogo from '/images/star.png';
 import SearchLogo from '/images/glass.png';
+import homeLogo from '/images/home.png';
 
 // a subclass to FetchHelper
 import Thread from '../utilities/Thread';
@@ -125,6 +126,8 @@ export default function StartPage() {
   // Run this when our component mounts (we can see it on screen)
   useEffect(() => {
     (async () => {
+      let isMounted = true;
+
       let myArticles = [];
       let newArticle = {
         title: 'Pirates of The Caribbean',
@@ -137,15 +140,6 @@ export default function StartPage() {
       myArticles.push(newArticle);
       setMovieArticles(myArticles);
 
-      fetch(`api/getAllGroups/`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(async (data) => {
-        let result = await data.json();
-        setUserGroups(result);
-      });
       let result = await (await fetch('/api/login')).json();
       if (result) {
         fetch(`/api/loggedInUsersUsername`, {
@@ -165,22 +159,19 @@ export default function StartPage() {
           },
         }).then(async (data) => {
           let relevantInfo = await data.json();
-          if (!relevantInfo) {
-            setLoggedIn(false);
-          } else {
-            setLoggedIn(true);
+          if (isMounted) {
+            if (!relevantInfo) {
+              setLoggedIn(false);
+            } else {
+              setLoggedIn(true);
+            }
           }
         });
-
-        fetch(`api/getGroupsIAmPartOf`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }).then(async (data) => {
-          setAlreadyPartOfGroups(await data.json());
-        });
       }
+
+      return () => {
+        isMounted = false;
+      };
     })();
   }, [alreadyPartOfGroups]);
 
@@ -270,6 +261,18 @@ export default function StartPage() {
             )
           )}
       </main>
+      <div className='StartFooter'>
+        <div className='SpaceBlock' />
+        <div className='HomeDiv'>
+          <div className='HomeText'>Home</div>
+          <img className='HomeLogo' src={homeLogo} />
+        </div>
+        <div className='SpaceBlock' />
+        <div className='ProfileDiv'>
+          <div className='ProfileText'>Profile</div>
+          <img className='ProfileLogo' src={ProfileIcon} />
+        </div>
+      </div>
     </div>
   );
 }

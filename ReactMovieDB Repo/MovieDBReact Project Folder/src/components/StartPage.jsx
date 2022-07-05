@@ -12,6 +12,7 @@ export default function StartPage() {
   const [loggedInUsername, setLoggedInUsername] = useState('');
   const [movieArticles, setMovieArticles] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [completedLoading, setCompletedLoading] = useState(false);
 
   let navigate = useNavigate();
 
@@ -82,8 +83,10 @@ export default function StartPage() {
           if (isMounted) {
             if (!relevantInfo) {
               setLoggedIn(false);
+              setCompletedLoading(true);
             } else {
               setLoggedIn(true);
+              setCompletedLoading(true);
             }
           }
         });
@@ -103,7 +106,7 @@ export default function StartPage() {
         <div className='SpaceBlock' />
         <div className='ForumText'>--=== The Movie DB ===--</div>
         <div className='SpaceBlock' />
-        {!loggedIn && (
+        {(!loggedIn && completedLoading) && (
           <div className='loginTextDiv'>
             <Link className='loginLink' to='/Login'>
               Login
@@ -111,7 +114,7 @@ export default function StartPage() {
           </div>
         )}
 
-        {loggedIn && (
+        {(loggedIn && completedLoading) && (
           <div className='profileText'>
             <Link className='profileLink' to={`/Profile/${loggedInUsername}`}>
               <img className='ProfileIcon' src={ProfileIcon} />

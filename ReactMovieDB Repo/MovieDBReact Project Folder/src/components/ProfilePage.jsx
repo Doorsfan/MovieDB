@@ -13,7 +13,7 @@ export default function ProfilePage() {
   useEffect(() => {
     (async () => {
       let loggedIn = await (await fetch('/api/login')).json();
-      console.log(loggedIn);
+
       fetch(`/api/getUserInfo/${loggedIn}`, {
         method: 'GET',
         headers: {

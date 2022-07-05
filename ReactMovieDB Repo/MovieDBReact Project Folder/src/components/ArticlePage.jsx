@@ -7,13 +7,10 @@ import StarImage from '/images/star.png';
 import BlackStar from '/images/black_star.png';
 import ReviewStar from '/images/white_star.png';
 import EmptyReviewStar from '/images/empty_star.png';
-
-// a "lazy"/automatically created subclass to FetchHelper
-import { factory } from '../utilities/FetchHelper';
-
-const { Book, Author } = factory;
+import placeholder from '/images/placeholder.png';
 
 export default function ArticlePage() {
+  const [author, setAuthor] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [title, setTitle] = useState('');
@@ -37,16 +34,16 @@ export default function ArticlePage() {
   let navigate = useNavigate();
 
   function createNewReview() {
-    fetch(`/api/whoAmI`, {
+    fetch(`/api/loggedInusersUsername`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     }).then(async (data) => {
       let authorResult = await data.json();
-
-      let threadInfo = {
-        author: authorResult,
+      setAuthor(authorResult);
+      let reviewInfo = {
+        author: author,
         content: review,
         rating: reviewRating,
       };
@@ -56,9 +53,9 @@ export default function ArticlePage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(threadInfo),
+        body: JSON.stringify(reviewInfo),
       }).then(async (data) => {
-        let myThread = await data.json();
+        let myReview = await data.json();
       });
 
       fetch(
@@ -71,7 +68,18 @@ export default function ArticlePage() {
         }
       ).then(async (data) => {
         let allReviews = await data.json();
-        setRelevantReviews(allReviews);
+        if (allReviews.length == 0) {
+          setRating(0);
+        } else {
+          let calculatedRating = 0;
+          for (let i = 0; i < allReviews.length; i++) {
+            calculatedRating += allReviews[i].rating;
+          }
+          calculatedRating = calculatedRating / allReviews.length;
+          calculatedRating = Math.round(calculatedRating * 10) / 10;
+          setRating(calculatedRating);
+          setRelevantReviews(allReviews);
+        }
       });
     });
   }
@@ -102,9 +110,20 @@ export default function ArticlePage() {
         }
       ).then(async (data) => {
         let allReviews = await data.json();
-        setRelevantReviews(allReviews);
+        if (allReviews.length == 0) {
+          setRating(0);
+        } else {
+          let calculatedRating = 0;
+          for (let i = 0; i < allReviews.length; i++) {
+            calculatedRating += allReviews[i].rating;
+          }
+          calculatedRating = calculatedRating / allReviews.length;
+          calculatedRating = Math.round(calculatedRating * 10) / 10;
+          setRating(calculatedRating);
+          setRelevantReviews(allReviews);
+        }
       });
-      fetch(`/api/whoAmI`, {
+      fetch(`/api/loggedInUsersUsername`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +164,6 @@ export default function ArticlePage() {
           setFirstTag(result.firstTag);
           setSecondTag(result.secondTag);
           setThirdTag(result.thirdTag);
-          setRating(result.Rating);
           setAgeRating(result.ageRating);
           setFirstRole(result.firstRole);
           setSecondRole(result.secondRole);
@@ -191,15 +209,22 @@ export default function ArticlePage() {
         )}
       </div>
       <main className='articleMain'>
-        <img className='articleImage' src={imageURL} />
+        {imageURL.length > 0 && <img className='articleImage' src={imageURL} />}
+        {imageURL.length == 0 && (
+          <img className='articleImage' src={placeholder} />
+        )}
         <div className='articleMovieTitleDiv'>{title}</div>
         <div className='tagsGrid'>
           <div className='SpaceBlock' />
           <div className='firstTag movieTag'>{firstTag}</div>
           <div className='SpaceBlock' />
-          <div className='secondTag movieTag'>{secondTag}</div>
+          {secondTag.length > 0 && (
+            <div className='secondTag movieTag'>{secondTag}</div>
+          )}
           <div className='SpaceBlock' />
-          <div className='thirdTag movieTag'>{thirdTag}</div>
+          {thirdTag.length > 0 && (
+            <div className='thirdTag movieTag'>{thirdTag}</div>
+          )}
           <div className='SpaceBlock' />
         </div>
         <div className='actorsAndStarsGrid'>

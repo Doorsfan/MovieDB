@@ -4,8 +4,6 @@ module.exports = function (app, runQuery, db) {
   function editMyUserInfo(req, res) {
     let userId = req.session.user?.id;
 
-    delete req.body.userRole;
-
     let queryParameters = { ...req.body, id: userId };
 
     if (queryParameters.password) {

@@ -17,13 +17,50 @@ export default function CreateNewArticlePage() {
   const [firstRole, setFirstRole] = useState('');
   const [secondRole, setSecondRole] = useState('');
   const [thirdRole, setThirdRole] = useState('');
+  const [fourthRole, setFourthRole] = useState('');
+  const [fifthRole, setFifthRole] = useState('');
   const [firstActor, setFirstActor] = useState('');
   const [secondActor, setSecondActor] = useState('');
   const [thirdActor, setThirdActor] = useState('');
+  const [fourthActor, setFourthActor] = useState('');
+  const [fifthActor, setFifthActor] = useState('');
   const [summary, setSummary] = useState('');
   const [author, setAuthor] = useState('');
 
   let navigate = useNavigate();
+
+  function makeNewArticle() {
+    let movieInfo = {
+      title: title,
+      imageURL: imageURL,
+      firstTag: firstTag,
+      secondTag: secondTag,
+      thirdTag: thirdTag,
+      firstActor: firstActor,
+      secondActor: secondActor,
+      thirdActor: thirdActor,
+      fourthActor: fourthActor,
+      fifthActor: fifthActor,
+      firstRole: firstRole,
+      secondRole: secondRole,
+      thirdRole: thirdRole,
+      fourthRole: fourthRole,
+      fifthRole: fifthRole,
+      Rating: rating,
+      ageRating: ageRating,
+      summary: summary,
+      author: author,
+    };
+    fetch('/api/makeNewArticle', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(movieInfo),
+    }).then(async (data) => {
+      let myArticle = await data.json();
+    });
+  }
 
   function logout() {
     fetch(`/api/logout`, {
@@ -107,6 +144,7 @@ export default function CreateNewArticlePage() {
           placeholder='The movies title..'
           className='movieTitleInput'
           type='text'
+          onChange={(e) => setTitle(e.target.value)}
         ></input>
         <div className='PublisherDiv'>
           <div className='PublisherText'>Publisher</div>
@@ -119,7 +157,10 @@ export default function CreateNewArticlePage() {
                 <div className='SpaceBlock' />
                 <div className='ageRatingText'>Age Rating:</div>
                 <div className='SpaceBlock' />
-                <select name='ageRatings'>
+                <select
+                  onChange={(e) => setAgeRating(e.target.value)}
+                  name='ageRatings'
+                >
                   <option value='General Audience'>G</option>
                   <option value='Parental Guidance'>PG</option>
                   <option value='Not for under 13'>PG-13</option>
@@ -134,13 +175,25 @@ export default function CreateNewArticlePage() {
             <div className='SpaceBlock' />
             <div className='editTags'>
               <div className='editMovieTag'>
-                <input placeholder='Tag 1' type='text'></input>
+                <input
+                  onChange={(e) => setFirstTag(e.target.value)}
+                  placeholder='Tag 1'
+                  type='text'
+                ></input>
               </div>
               <div className='editMovieTag'>
-                <input placeholder='Tag 2 (Optional)' type='text'></input>
+                <input
+                  onChange={(e) => setSecondTag(e.target.value)}
+                  placeholder='Tag 2 (Optional)'
+                  type='text'
+                ></input>
               </div>
               <div className='editMovieTag'>
-                <input placeholder='Tag 3 (Optional)' type='text'></input>
+                <input
+                  onChange={(e) => setThirdTag(e.target.value)}
+                  placeholder='Tag 3 (Optional)'
+                  type='text'
+                ></input>
               </div>
             </div>
           </div>
@@ -153,37 +206,77 @@ export default function CreateNewArticlePage() {
           </div>
           <div className='actorAndRoleDiv'>
             <div className='SpaceBlock' />
-            <input type='text' placeholder='Actor 1'></input>
+            <input
+              onChange={(e) => setFirstActor(e.target.value)}
+              type='text'
+              placeholder='Actor 1'
+            ></input>
             <div className='SpaceBlock' />
-            <input type='text' placeholder='Role 1'></input>
-            <div className='SpaceBlock' />
-          </div>
-          <div className='actorAndRoleDiv'>
-            <div className='SpaceBlock' />
-            <input type='text' placeholder='Actor 2 (Optional)'></input>
-            <div className='SpaceBlock' />
-            <input type='text' placeholder='Role 2 (Optional)'></input>
-            <div className='SpaceBlock' />
-          </div>
-          <div className='actorAndRoleDiv'>
-            <div className='SpaceBlock' />
-            <input type='text' placeholder='Actor 3 (Optional)'></input>
-            <div className='SpaceBlock' />
-            <input type='text' placeholder='Role 3 (Optional)'></input>
+            <input
+              onChange={(e) => setFirstRole(e.target.value)}
+              type='text'
+              placeholder='Role 1'
+            ></input>
             <div className='SpaceBlock' />
           </div>
           <div className='actorAndRoleDiv'>
             <div className='SpaceBlock' />
-            <input type='text' placeholder='Actor 4 (Optional)'></input>
+            <input
+              onChange={(e) => setSecondActor(e.target.value)}
+              type='text'
+              placeholder='Actor 2 (Optional)'
+            ></input>
             <div className='SpaceBlock' />
-            <input type='text' placeholder='Role 4 (Optional)'></input>
+            <input
+              onChange={(e) => setSecondRole(e.target.value)}
+              type='text'
+              placeholder='Role 2 (Optional)'
+            ></input>
             <div className='SpaceBlock' />
           </div>
           <div className='actorAndRoleDiv'>
             <div className='SpaceBlock' />
-            <input type='text' placeholder='Actor 5 (Optional)'></input>
+            <input
+              onChange={(e) => setThirdActor(e.target.value)}
+              type='text'
+              placeholder='Actor 3 (Optional)'
+            ></input>
             <div className='SpaceBlock' />
-            <input type='text' placeholder='Role 5 (Optional)'></input>
+            <input
+              onChange={(e) => setThirdRole(e.target.value)}
+              type='text'
+              placeholder='Role 3 (Optional)'
+            ></input>
+            <div className='SpaceBlock' />
+          </div>
+          <div className='actorAndRoleDiv'>
+            <div className='SpaceBlock' />
+            <input
+              onChange={(e) => setFourthActor(e.target.value)}
+              type='text'
+              placeholder='Actor 4 (Optional)'
+            ></input>
+            <div className='SpaceBlock' />
+            <input
+              onChange={(e) => setFourthRole(e.target.value)}
+              type='text'
+              placeholder='Role 4 (Optional)'
+            ></input>
+            <div className='SpaceBlock' />
+          </div>
+          <div className='actorAndRoleDiv'>
+            <div className='SpaceBlock' />
+            <input
+              onChange={(e) => setFifthActor(e.target.value)}
+              type='text'
+              placeholder='Actor 5 (Optional)'
+            ></input>
+            <div className='SpaceBlock' />
+            <input
+              onChange={(e) => setFifthRole(e.target.value)}
+              type='text'
+              placeholder='Role 5 (Optional)'
+            ></input>
             <div className='SpaceBlock' />
           </div>
         </div>
@@ -193,6 +286,7 @@ export default function CreateNewArticlePage() {
           <div className='SpaceBlock' />
           <div className='movieURLInputDiv'>
             <input
+              onChange={(e) => setImageURL(e.target.value)}
               className='movieURLInput'
               type='text'
               placeholder='Movie picture URL goes here..'
@@ -210,7 +304,11 @@ export default function CreateNewArticlePage() {
           rows='5'
           cols='50'
         ></textarea>
-        <button value='Publish' className='publishArticleButton'>
+        <button
+          onClick={() => makeNewArticle()}
+          value='Publish'
+          className='publishArticleButton'
+        >
           Publish
         </button>
       </main>

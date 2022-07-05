@@ -1,18 +1,10 @@
 import { useState, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
-import FetchHelper from '../utilities/FetchHelper';
+import { BrowserRouter as Router, Link, useNavigate } from 'react-router-dom';
+
 import placeholder from '/images/placeholder.png';
 import starLogo from '/images/star.png';
 
 export default function ProfilePage() {
-  const [userRole, setUserRole] = useState();
   const [username, setUserName] = useState();
   const [myArticles, setMyArticles] = useState([]);
 
@@ -21,7 +13,8 @@ export default function ProfilePage() {
   useEffect(() => {
     (async () => {
       let loggedIn = await (await fetch('/api/login')).json();
-      fetch(`/api/getUserInfo/${loggedIn?.username}`, {
+      console.log(loggedIn);
+      fetch(`/api/getUserInfo/${loggedIn}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +50,6 @@ export default function ProfilePage() {
           </Link>
         </div>
       </div>
-      {userRole && <div className='roleText'>Site Role: {userRole}</div>}
       {username && <div className='usernameText'>Username: {username}</div>}
       {myArticles.length > 0 && (
         <div className='articlesText'>
@@ -72,6 +64,7 @@ export default function ProfilePage() {
               ({
                 id,
                 title,
+                imageURL,
                 created,
                 Rating,
                 firstTag,
@@ -82,11 +75,12 @@ export default function ProfilePage() {
                   <div className='profileMovieArticle' key={id}>
                     <div className='movieImageLogoDiv'>
                       <div className='SpaceBlock' />
-                      <img
-                        className='movieImageLogo'
-                        src={placeholder}
-                        alt='Home'
-                      />
+                      {imageURL.length > 0 && (
+                        <img className='movieImageLogo' src={imageURL} />
+                      )}
+                      {imageURL.length == 0 && (
+                        <img className='movieImageLogo' src={placeholder} />
+                      )}
                       <div className='SpaceBlock' />
                       <div className='profileMovieTitleDiv'>{title}</div>
                       <div className='SpaceBlock' />
@@ -106,9 +100,19 @@ export default function ProfilePage() {
                       <div className='SpaceBlock' />
                       <div className='firstTagDiv'>{firstTag}</div>
                       <div className='SpaceBlock' />
-                      <div className='secondTagDiv'>{secondTag}</div>
+                      {secondTag.length > 0 && (
+                        <div className='secondTagDiv'>{secondTag}</div>
+                      )}
+                      {secondTag.length == 0 && (
+                        <div className='secondEmptyTagDiv' />
+                      )}
                       <div className='SpaceBlock' />
-                      <div className='thirdTagDiv'>{thirdTag}</div>
+                      {thirdTag.length > 0 && (
+                        <div className='thirdTagDiv'>{thirdTag}</div>
+                      )}
+                      {thirdTag.length == 0 && (
+                        <div className='thirdEmptyTagDiv' />
+                      )}
                       <div className='SpaceBlock' />
                     </div>
                   </div>

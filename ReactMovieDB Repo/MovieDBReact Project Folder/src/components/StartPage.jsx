@@ -5,31 +5,13 @@ import starLogo from '/images/star.png';
 import SearchLogo from '/images/glass.png';
 import homeLogo from '/images/home.png';
 
-// a subclass to FetchHelper
-import Thread from '../utilities/Thread';
-import UserGroup from '../utilities/UserGroup';
-import LoginPage from './LoginPage';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-} from 'react-router-dom';
-
-// a "lazy"/automatically created subclass to FetchHelper
-import { factory } from '../utilities/FetchHelper';
-
-const { Book, Author } = factory;
+import { BrowserRouter as Router, Link, useNavigate } from 'react-router-dom';
 
 export default function StartPage() {
-  const [threads, setThreads] = useState([]);
-  const [userGroups, setUserGroups] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [alreadyPartOfGroups, setAlreadyPartOfGroups] = useState([]);
-  const [joinedNewGroup, setJoinedNewGroup] = useState(false);
   const [loggedInUsername, setLoggedInUsername] = useState('');
   const [movieArticles, setMovieArticles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   let navigate = useNavigate();
 
@@ -45,100 +27,38 @@ export default function StartPage() {
     });
   }
 
-  function leaveGroup(name) {
-    let relevantInfo = {
-      name: window.location.pathname.split('/')[2],
-    };
-
-    fetch(`/api/leaveGroup/` + name, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(relevantInfo),
-    }).then(async (data) => {
-      let response = await data.json();
-    });
-
-    fetch(`api/getGroupsIAmPartOf`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(async (data) => {
-      setAlreadyPartOfGroups(await data.json());
-    });
-  }
-
-  function joinGroup(groupName) {
-    let groupInfo = {
-      name: groupName,
-    };
-    fetch(`api/joinGroup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(groupInfo),
-    }).then(async (data) => {
-      setJoinedNewGroup(true);
-    });
-
-    fetch(`api/getGroupsIAmPartOf`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(async (data) => {
-      setAlreadyPartOfGroups(await data.json());
-    });
-  }
-
-  const renderJoinButton = (name) => {
-    let foundName = false;
-    if (loggedIn) {
-      for (let e = 0; e < alreadyPartOfGroups.length; e++) {
-        if (name == alreadyPartOfGroups[e]) {
-          foundName = true;
-          return (
-            <button
-              onClick={() => leaveGroup(name)}
-              className='joinGroupButton'
-            >
-              Leave Group
-            </button>
-          );
-        }
-      }
-      if (!foundName) {
-        return (
-          <button
-            onClick={async () => joinGroup(name)}
-            className='joinGroupButton'
-          >
-            Join Group
-          </button>
-        );
-      }
+  function searchForArticles(searchTerm) {
+    if (searchTerm.length == 0 || searchTerm == '') {
+      fetch(`/api/getAllArticles`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(async (data) => {
+        let searchResult = await data.json();
+        setMovieArticles(searchResult);
+      });
+    } else {
+      fetch(`/api/getSearchedForArticle/` + searchTerm, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(async (data) => {
+        let searchResult = await data.json();
+        setMovieArticles(searchResult);
+      });
     }
-  };
+  }
 
   // Run this when our component mounts (we can see it on screen)
   useEffect(() => {
     (async () => {
       let isMounted = true;
 
-      let myArticles = [];
-      let newArticle = {
-        title: 'Pirates of The Caribbean',
-        rating: 4.3,
-        created: '2022-10-02',
-        firstTag: 'Action',
-        secondTag: 'Pirates',
-        thirdTag: 'Johny Depp',
-      };
-      myArticles.push(newArticle);
-      setMovieArticles(myArticles);
+      let allArticles = await (await fetch('/api/getAllArticles')).json();
+
+      setMovieArticles(allArticles);
 
       let result = await (await fetch('/api/login')).json();
       if (result) {
@@ -173,7 +93,7 @@ export default function StartPage() {
         isMounted = false;
       };
     })();
-  }, [alreadyPartOfGroups]);
+  }, []);
 
   return (
     <div className='body'>
@@ -205,9 +125,18 @@ export default function StartPage() {
       </div>
       <div className='searchBarPart'>
         <div className='SpaceBlock' />
-        <input type='text' className='searchBar' placeholder='Search..' />
+        <input
+          type='text'
+          className='searchBar'
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder='Search..'
+        />
         <div className='SpaceBlock' />
-        <img className='SearchIcon' src={SearchLogo} />
+        <img
+          className='SearchIcon'
+          onClick={() => searchForArticles(searchTerm)}
+          src={SearchLogo}
+        />
         <div className='SpaceBlock' />
       </div>
       <main className='startPageBody'>
@@ -217,7 +146,7 @@ export default function StartPage() {
               id,
               title,
               imageURL,
-              rating,
+              Rating,
               created,
               firstTag,
               secondTag,
@@ -227,11 +156,12 @@ export default function StartPage() {
                 <div className='movieArticle' key={id}>
                   <div className='movieImageLogoDiv'>
                     <div className='SpaceBlock' />
-                    <img
-                      className='movieImageLogo'
-                      src={placeholder}
-                      alt='Home'
-                    />
+                    {imageURL.length > 0 && (
+                      <img className='movieImageLogo' src={`${imageURL}`} />
+                    )}
+                    {imageURL.length == 0 && (
+                      <img className='movieImageLogo' src={placeholder} />
+                    )}
                     <div className='SpaceBlock' />
                     <div className='movieTitleDiv'>{title}</div>
                     <div className='SpaceBlock' />
@@ -246,14 +176,18 @@ export default function StartPage() {
                         src={starLogo}
                         alt='Star'
                       />
-                      <div className='ratingText'>{rating}/5</div>
+                      <div className='ratingText'>{Rating}/5</div>
                     </div>
                     <div className='SpaceBlock' />
                     <div className='firstTagDiv'>{firstTag}</div>
                     <div className='SpaceBlock' />
-                    <div className='secondTagDiv'>{secondTag}</div>
+                    {secondTag.length > 0 && (
+                      <div className='secondTagDiv'>{secondTag}</div>
+                    )}
                     <div className='SpaceBlock' />
-                    <div className='thirdTagDiv'>{thirdTag}</div>
+                    {thirdTag.length > 0 && (
+                      <div className='thirdTagDiv'>{thirdTag}</div>
+                    )}
                     <div className='SpaceBlock' />
                   </div>
                 </div>
@@ -263,15 +197,16 @@ export default function StartPage() {
       </main>
       <div className='StartFooter'>
         <div className='SpaceBlock' />
-        <div className='HomeDiv'>
-          <div className='HomeText'>Home</div>
-          <img className='HomeLogo' src={homeLogo} />
-        </div>
         <div className='SpaceBlock' />
-        <div className='ProfileDiv'>
-          <div className='ProfileText'>Profile</div>
-          <img className='ProfileLogo' src={ProfileIcon} />
-        </div>
+        <div className='SpaceBlock' />
+        {loggedIn && (
+          <Link className='profileLink' to={`/Profile/${loggedInUsername}`}>
+            <div className='ProfileDiv'>
+              <div className='ProfileText'>Profile</div>
+              <img className='ProfileLogo' src={ProfileIcon} />
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );

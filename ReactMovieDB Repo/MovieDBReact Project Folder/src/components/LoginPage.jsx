@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
 import homeLogo from '/images/home.png';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 export default function LoginPage() {
   const [username, setUserName] = useState();

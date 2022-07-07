@@ -62,6 +62,7 @@ export default function StartPage() {
       setMovieArticles(allArticles);
 
       let result = await (await fetch('/api/login')).json();
+      console.log(result);
       if (result) {
         fetch(`/api/loggedInUsersUsername`, {
           method: 'GET',
@@ -81,15 +82,13 @@ export default function StartPage() {
         }).then(async (data) => {
           let relevantInfo = await data.json();
           if (isMounted) {
-            if (!relevantInfo) {
-              setLoggedIn(false);
-              setCompletedLoading(true);
-            } else {
-              setLoggedIn(true);
-              setCompletedLoading(true);
-            }
+            setLoggedIn(true);
+            setCompletedLoading(true);
           }
         });
+      } else {
+        setLoggedIn(false);
+        setCompletedLoading(true);
       }
 
       return () => {
@@ -106,7 +105,7 @@ export default function StartPage() {
         <div className='SpaceBlock' />
         <div className='ForumText'>--=== The Movie DB ===--</div>
         <div className='SpaceBlock' />
-        {(!loggedIn && completedLoading) && (
+        {!loggedIn && completedLoading && (
           <div className='loginTextDiv'>
             <Link className='loginLink' to='/Login'>
               Login
@@ -114,7 +113,7 @@ export default function StartPage() {
           </div>
         )}
 
-        {(loggedIn && completedLoading) && (
+        {loggedIn && completedLoading && (
           <div className='profileText'>
             <Link className='profileLink' to={`/Profile/${loggedInUsername}`}>
               <img className='ProfileIcon' src={ProfileIcon} />

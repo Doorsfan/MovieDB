@@ -96,16 +96,16 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         `SELECT * FROM Review WHERE movieName = :movieName`
       );
       let movieReviewsResult = allReviewsRequest.all({
-        movieName: req.params['movieName']
+        movieName: req.params['movieName'],
       });
       res.status(200);
       res.json(movieReviewsResult);
     } catch (e) {}
-  })
+  });
 
   app.post('/api/postNewReview/:movieName', (req, res) => {
     try {
-      if (!(req.session.user)) {
+      if (!req.session.user) {
         throw 'Have to be logged in for that.';
       }
 
@@ -117,14 +117,12 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         author: req.session.user,
         content: req.body.content,
         rating: req.body.rating,
-        movieName: req.params['movieName']
+        movieName: req.params['movieName'],
       });
-      
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e);
     }
-  })
+  });
 
   function seeIfIAmLoggedIn(req) {
     return req.session.user != null;
@@ -158,12 +156,11 @@ module.exports = function setupRESTapi(app, databaseConnection) {
         Rating: req.body.Rating,
         ageRating: req.body.ageRating,
         summary: req.body.summary,
-        author: req.body.author
+        author: req.body.author,
       });
       res.status(200);
-      res.json('Created a new Article')
-    }
-    catch (e) {
+      res.json('Created a new Article');
+    } catch (e) {
       console.log(e);
       res.status(500);
       res.json('Something went wrong');
@@ -191,14 +188,16 @@ module.exports = function setupRESTapi(app, databaseConnection) {
     let allArticles = db.prepare(`SELECT * FROM Movie`);
     let result = allArticles.all();
     res.json(result);
-  })
+  });
 
   app.get('/api/getSearchedForArticle/:articleName', (req, res) => {
     const param = '%' + req.params['articleName'] + '%';
-    let searchResult = db.prepare(`SELECT * FROM Movie WHERE Movie.title LIKE '` + param + `'`);
-    let myResult = searchResult.all()
+    let searchResult = db.prepare(
+      `SELECT * FROM Movie WHERE Movie.title LIKE '` + param + `'`
+    );
+    let myResult = searchResult.all();
     res.json(myResult);
-  })
+  });
 
   app.get('/api/getMyArticles/:author', (req, res) => {
     try {
@@ -214,11 +213,10 @@ module.exports = function setupRESTapi(app, databaseConnection) {
       });
 
       res.json(myArticles);
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e);
     }
-  })
+  });
 
   app.post('/api/registerNewUser', (req, res) => {
     try {

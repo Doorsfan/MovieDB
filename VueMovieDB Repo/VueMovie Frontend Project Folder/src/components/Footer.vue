@@ -31,7 +31,7 @@ export default {
   font-family: 'Roboto', sans-serif;
 }
 .footerDiv {
-  background-color: rgba(97, 191, 197, 0.82);
+  background-color: #FF1C1C;
   display: grid;
   grid-template-columns: max-content auto max-content;
   height: 65px;

@@ -301,12 +301,12 @@ export default {
   border-radius: 30px;
 }
 .upperGrid {
-  background-color: rgb(97, 191, 197);
+  background-color: #FF1C1C;
   display: grid;
   grid-template-columns: 47px auto max-content 47px;
 }
 .notLoggedInUpperGrid {
-  background-color: rgb(97, 191, 197);
+  background-color: #FF1C1C;
   display: grid;
   grid-template-columns: 47px auto max-content 1px;
 }
